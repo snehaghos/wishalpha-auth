@@ -51,80 +51,6 @@ const Register = () => {
         </div>
 
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label htmlFor="contactNo" className="block text-gray-300 mb-1">
-              Contact No
-            </label>
-            <input
-              type="text"
-              id="contactNo"
-              placeholder="Your contact number"
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="role" className="block text-gray-300 mb-1">
-              Role
-            </label>
-            <select
-              id="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-            >
-              <option value="">Select Role</option>
-              <option value="admin">Admin</option>
-              <option value="developer">Developer</option>
-              <option value="user">User</option>
-            </select>
-          </div>
-        </div>
-
-    
-        {role === "developer" && (
-          <>
-            <div className="mb-4">
-              <label htmlFor="skills" className="block text-gray-300 mb-1">
-                Skills
-              </label>
-              <input
-                type="text"
-                id="skills"
-                placeholder="e.g. React, Node.js, Python"
-                className="w-full px-4 py-2 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="portfolio" className="block text-gray-300 mb-1">
-                Portfolio/GitHub Link
-              </label>
-              <input
-                type="url"
-                id="portfolio"
-                placeholder="https://github.com/yourprofile"
-                className="w-full px-4 py-2 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
-              />
-            </div>
-          </>
-        )}
-
-
-        {role === "user" && (
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-gray-300 mb-1">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Choose a username"
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
-          </div>
-        )}
 
         <div className="mb-4">
           <label htmlFor="password" className="block text-gray-300 mb-1">
@@ -150,7 +76,7 @@ const Register = () => {
           />
         </div>
 
-  
+
         <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
           Sign Up
         </button>
