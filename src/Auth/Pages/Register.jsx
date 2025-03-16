@@ -50,7 +50,7 @@ const Register = () => {
           />
         </div>
 
-        {/* Contact No & Role - Side by Side */}
+
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label htmlFor="contactNo" className="block text-gray-300 mb-1">
@@ -82,7 +82,7 @@ const Register = () => {
           </div>
         </div>
 
-        {/* Extra Fields for Developers */}
+    
         {role === "developer" && (
           <>
             <div className="mb-4">
@@ -111,7 +111,7 @@ const Register = () => {
           </>
         )}
 
-        {/* Extra Fields for Users */}
+
         {role === "user" && (
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-300 mb-1">
@@ -126,7 +126,6 @@ const Register = () => {
           </div>
         )}
 
-        {/* Password */}
         <div className="mb-4">
           <label htmlFor="password" className="block text-gray-300 mb-1">
             Password
@@ -139,7 +138,6 @@ const Register = () => {
           />
         </div>
 
-        {/* Confirm Password */}
         <div className="mb-6">
           <label htmlFor="confirmPassword" className="block text-gray-300 mb-1">
             Confirm Password
@@ -152,12 +150,11 @@ const Register = () => {
           />
         </div>
 
-        {/* Sign Up Button */}
+  
         <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
           Sign Up
         </button>
 
-        {/* Already have an account? */}
         <div className="mt-4 text-center">
           <p className="text-gray-300">
             Already have an account?{" "}
