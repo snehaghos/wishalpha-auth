@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../Auth/Pages/Login";
-import Register from "../Auth/Pages/Register";
-import ForgotPassword from "../Auth/Pages/ForgetPassword";
-import ResetPassword from "../Auth/Pages/ResetPassword";
-import VerifyEmail from "../Auth/Pages/VerifyEmail";
+import Login from "../Auth/Pages/Login/Login";
+import Register from "../Auth/Pages/Register/Register";
+import ForgotPassword from "../Auth/Pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "../Auth/Pages/ResetPassword/ResetPassword";
+import VerifyEmail from "../Auth/Pages/VerifyEmail/VerifyEmail";
+
 
 
 const Router = () => {
@@ -12,9 +13,9 @@ const Router = () => {
     <Routes>
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
-      <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+      <Route path="/auth/forgot-password" element={<ForgotPassword/>} />
       <Route path="/auth/reset-password" element={<ResetPassword />} />
-      <Route path="/auth/verify-email" element={<VerifyEmail />} />
+      <Route path="/auth/verify-email" element={<VerifyEmail/>} />
     </Routes>
   );
 };
