@@ -1,22 +1,40 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../Auth/Pages/Login/Login";
-import Register from "../Auth/Pages/Register/Register";
-import ForgotPassword from "../Auth/Pages/ForgetPassword/ForgetPassword";
-import ResetPassword from "../Auth/Pages/ResetPassword/ResetPassword";
-import VerifyEmail from "../Auth/Pages/VerifyEmail/VerifyEmail";
 
+import ForgotPassword from "../Pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "../Pages/ResetPassword/ResetPassword";
+import VerifyEmail from "../Pages/VerifyEmail/VerifyEmail";
+import { Login, Register } from "../Auth";
+import AuthContextProvider from "../Auth/context/AuthContextProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 
 const Router = () => {
   return (
-    <Routes>
-      <Route path="/auth/login" element={<Login />} />
-      <Route path="/auth/register" element={<Register />} />
-      <Route path="/auth/forgot-password" element={<ForgotPassword/>} />
-      <Route path="/auth/reset-password" element={<ResetPassword />} />
-      <Route path="/auth/verify-email" element={<VerifyEmail/>} />
-    </Routes>
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <AuthContextProvider>
+              <Login />
+            </AuthContextProvider>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <AuthContextProvider>
+              <Register />
+            </AuthContextProvider>
+          }
+        />
+        <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+        <Route path="/auth/reset-password" element={<ResetPassword />} />
+        <Route path="/auth/verify-email" element={<VerifyEmail />} />
+      </Routes>
+    </QueryClientProvider>
   );
 };
 
