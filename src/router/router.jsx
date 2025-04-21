@@ -15,6 +15,14 @@ const Router = () => {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route
+          path="/"
+          element={
+            <AuthContextProvider>
+              <Login />
+            </AuthContextProvider>
+          }
+        />
+        <Route
           path="/login"
           element={
             <AuthContextProvider>
@@ -34,6 +42,7 @@ const Router = () => {
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route path="/auth/verify-email" element={<VerifyEmail />} />
       </Routes>
+
     </QueryClientProvider>
   );
 };

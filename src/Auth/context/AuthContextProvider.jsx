@@ -1,10 +1,17 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import { useEffect, useRef, useState } from "react";
 import { loginService, registerService } from "../services/auth";
 import { useMutation } from "@tanstack/react-query";
 
+
+
+
 const AuthContextProvider = ({ children }) => {
+
+  const location = useLocation();
+const queryParams = new URLSearchParams(location.search);
+const redirectUri = queryParams.get("redirect_uri") || "/dashboard";
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     profileImageUrl: "",
@@ -14,6 +21,16 @@ const AuthContextProvider = ({ children }) => {
   });
   const [newSkill, setNewSkill] = useState("");
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const redirect = queryParams.get("redirect_uri");
+  
+    if (redirect) {
+      localStorage.setItem("redirect_uri", redirect);
+    }
+  }, [location.search]);
+  
 
   useEffect(() => {
     const previousData = {
@@ -84,12 +101,33 @@ const AuthContextProvider = ({ children }) => {
     mutationFn: loginService,
     onSuccess: (res) => {
       console.log("Logged in successfully", res);
-      navigate("/app");
-    },
+    
+      const storedRedirect = localStorage.getItem("redirect_uri") || "/";
+      const redirectWithToken = new URL(storedRedirect);
+      redirectWithToken.searchParams.set("token", res.accessToken);
+      window.location.href = redirectWithToken.toString();
+      const accessToken = res.accessToken;
+    
+      try {
+        const redirectUrl = new URL(storedRedirect);
+
+        redirectUrl.searchParams.set("token", accessToken);
+  
+        window.location.href = redirectUrl.toString();
+      } catch {
+        localStorage.setItem("accessToken", accessToken);
+        navigate(storedRedirect);
+      }
+    
+      localStorage.removeItem("redirect_uri");
+    }
+    ,
     onError: () => {
       console.log("Login failed");
     },
   });
+  
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
