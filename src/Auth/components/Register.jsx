@@ -87,7 +87,7 @@ function Register() {
             </form>
             <p className="text-center mt-8 text-gray-400"></p>
             Already have an account?
-            <Link to="/login" className="text-purple-400 cursor-pointer">
+            <Link to="/" className="text-purple-400 cursor-pointer">
               Login
             </Link>
           </motion.div>

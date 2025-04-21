@@ -14,8 +14,7 @@ const Router = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route
-          path="/login"
+        <Route index
           element={
             <AuthContextProvider>
               <Login />
