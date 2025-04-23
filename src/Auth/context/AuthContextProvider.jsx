@@ -110,6 +110,7 @@ const redirectUri = queryParams.get("redirect_uri") || "/";
         console.error("Access token is missing in the response.");
         return;
       }
+      //ok
   
       localStorage.setItem("accessToken", accessToken);
       console.log("Access Token stored in localStorage:", localStorage.getItem("accessToken")); 
