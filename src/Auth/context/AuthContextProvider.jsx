@@ -107,7 +107,7 @@ const redirectUri = queryParams.get("redirect_uri") || "/dashboard";
       redirectWithToken.searchParams.set("token", res.accessToken);
       window.location.href = redirectWithToken.toString();
       const accessToken = res.accessToken;
-    
+      localStorage.setItem("accessToken", accessToken);
       try {
         const redirectUrl = new URL(storedRedirect);
 
