@@ -11,7 +11,7 @@ const AuthContextProvider = ({ children }) => {
 
   const location = useLocation();
 const queryParams = new URLSearchParams(location.search);
-const redirectUri = queryParams.get("redirect_uri") || "/dashboard";
+const redirectUri = queryParams.get("redirect_uri") || "/";
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     profileImageUrl: "",
@@ -100,30 +100,34 @@ const redirectUri = queryParams.get("redirect_uri") || "/dashboard";
   const mutationLogin = useMutation({
     mutationFn: loginService,
     onSuccess: (res) => {
-      console.log("Logged in successfully", res);
-    
-      const storedRedirect = localStorage.getItem("redirect_uri") || "/";
-      const redirectWithToken = new URL(storedRedirect);
-      redirectWithToken.searchParams.set("token", res.accessToken);
-      window.location.href = redirectWithToken.toString();
-      const accessToken = res.accessToken;
-      localStorage.setItem("accessToken", accessToken);
-      try {
-        const redirectUrl = new URL(storedRedirect);
-
-        redirectUrl.searchParams.set("token", accessToken);
+      console.log("Login response:", res);
   
-        window.location.href = redirectUrl.toString();
-      } catch {
-        localStorage.setItem("accessToken", accessToken);
-        navigate(storedRedirect);
-      }
     
-      localStorage.removeItem("redirect_uri");
-    }
-    ,
-    onError: () => {
-      console.log("Login failed");
+      const accessToken = res.data?.access_token;
+  
+
+      if (!accessToken) {
+        console.error("Access token is missing in the response.");
+        return;
+      }
+  
+      localStorage.setItem("accessToken", accessToken);
+      console.log("Access Token stored in localStorage:", localStorage.getItem("accessToken")); 
+  
+     
+
+      const storedRedirect = localStorage.getItem("redirect_uri") || "/";
+      console.log("Stored Redirect URI:", storedRedirect);
+    const redirectWithToken = new URL(storedRedirect, window.location.origin);
+    redirectWithToken.searchParams.set("token", accessToken);
+
+
+
+      console.log("Redirecting to:", redirectWithToken.toString());
+      window.location.href = redirectWithToken.toString();
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
     },
   });
   
@@ -143,7 +147,7 @@ const redirectUri = queryParams.get("redirect_uri") || "/dashboard";
     mutationFn: registerService,
     onSuccess: (res) => {
       console.log("Registered successfully", res);
-      navigate("/dashboard");
+      navigate("/");
     },
     onError: () => {
       console.log("Register failed");
