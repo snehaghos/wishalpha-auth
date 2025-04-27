@@ -46,6 +46,8 @@ const redirectUri = queryParams.get("redirect_uri") || "/";
     const { name, value } = e.target;
     setProfileData((prev) => ({ ...prev, [name]: value }));
   };
+  //added change
+  
 
   const addSkill = () => {
     if (newSkill.trim() && !profileData.skills.includes(newSkill.trim())) {
